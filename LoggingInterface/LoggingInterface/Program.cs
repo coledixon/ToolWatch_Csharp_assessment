@@ -32,11 +32,16 @@ namespace LoggingInterface
                 _debug.DeleteLog(logPath); // remove failed log
                 _error.WriteLog(logPath, e.Message); // error logger
             }
-#endif
+            #endif
 
             try
             {
                 _info.WriteLog(logPath, "hello, world"); // default logger
+            }
+            catch (Exception e)
+            {
+                _info.DeleteLog(logPath); // remove failed log
+                _error.WriteLog(logPath, e.Message); // error logger
             }
         }
     }
