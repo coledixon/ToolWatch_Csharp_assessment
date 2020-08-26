@@ -9,7 +9,8 @@ namespace LoggingInterface
 {
     class logger
     {
-
+        // TO DO
+        // base class with more behavioural definitions
     }
 
     // define interface
