@@ -17,25 +17,26 @@ namespace LoggingInterface
             string logPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // instantiate objects
-            
             LogDebug _debug = new LogDebug();
             LogError _error = new LogError();
             LogInfo _info = new LogInfo();
 
             // write to the specified logs
             #if DEBUG // env debug == true
-                _debug.WriteLog(logPath, "debug statement");
-            #endif
-
             try
             {
-                // default logger
-                _info.WriteLog(logPath, "hello, world");
+                _debug.WriteLog(logPath, "debug statement");
             }
             catch (Exception e)
             {
-                _info.DeleteLog(logPath); // remove failed log
+                _debug.DeleteLog(logPath); // remove failed log
                 _error.WriteLog(logPath, e.Message); // error logger
+            }
+#endif
+
+            try
+            {
+                _info.WriteLog(logPath, "hello, world"); // default logger
             }
         }
     }

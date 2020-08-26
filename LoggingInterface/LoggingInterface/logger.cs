@@ -40,6 +40,12 @@ namespace LoggingInterface
                 s.Close();
             }
         }
+
+        public void DeleteLog(string path)
+        {
+            string _path = path + debugFile;
+            File.Delete(_path);
+        }
     }
 
     public class LogError : ILogger
