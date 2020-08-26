@@ -9,14 +9,15 @@ namespace LoggingInterface
 {
     class Program
     {
+        private LogDebug _debug;
+
         static void Main(string[] args)
         {
             // define log location (setting to non-roaming users appdata store)
             string logPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            logger _logger = new logger();
-
             // instantiate objects
+            
             LogDebug _debug = new LogDebug();
             LogError _error = new LogError();
             LogInfo _info = new LogInfo();
