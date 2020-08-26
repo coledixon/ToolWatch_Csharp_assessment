@@ -9,8 +9,6 @@ namespace LoggingInterface
 {
     class Program
     {
-        private LogDebug _debug;
-
         static void Main(string[] args)
         {
             // define log location (setting to non-roaming users appdata store)
