@@ -31,7 +31,7 @@ namespace LoggingInterface
                 _error.WriteLog(logPath, e.Message); // error logger
             }
             #endif
-
+            
             try
             {
                 _info.WriteLog(logPath, "hello, world"); // default logger
