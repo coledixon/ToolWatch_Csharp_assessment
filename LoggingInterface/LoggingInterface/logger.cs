@@ -9,6 +9,8 @@ namespace LoggingInterface
 {
     class logger
     {
+
+
         public static void WriteLog(string path, string output)
         {
             if (!File.Exists(path))
@@ -24,12 +26,11 @@ namespace LoggingInterface
             }
         }
 
-        public static string things()
+        // set datetime stamp for use in filename
+        public static string SetDateTimeTicks()
         {
             return "\\" + DateTime.UtcNow.Ticks; 
         }
-        // TO DO
-        // base class with more behavioural definitions
     }
 
     // define interface
@@ -42,7 +43,7 @@ namespace LoggingInterface
     // log classes
     public class LogDebug : ILogger
     {
-        public string debugFile = logger.things() + "_DEBUG.txt";
+        public string debugFile = logger.SetDateTimeTicks() + "_DEBUG.txt";
 
         public void WriteLog(string path, string output)
         {
@@ -60,7 +61,7 @@ namespace LoggingInterface
 
     public class LogError : ILogger
     {
-        public string errorFile = "\\" + DateTime.UtcNow.Ticks + "_ERROR.txt";
+        public string errorFile = logger.SetDateTimeTicks() + "_ERROR.txt";
         public void WriteLog(string path, string output)
         {
             string _path = path + errorFile;
@@ -71,7 +72,7 @@ namespace LoggingInterface
 
     public class LogInfo : ILogger
     {
-        public string infoFile = "\\" + DateTime.UtcNow.Ticks + "_LOG.txt";
+        public string infoFile = logger.SetDateTimeTicks() + "_LOG.txt";
         public void WriteLog(string path, string output)
         {
             string _path = path + infoFile;
