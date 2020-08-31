@@ -11,8 +11,12 @@ namespace LoggingInterface
     {
         static void Main(string[] args)
         {
+            // CD: deprecated // string logPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            props p = new props();
+
             // define log location (setting to non-roaming users appdata store)
-            string logPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            p.path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // instantiate objects
             LogDebug _debug = new LogDebug();
@@ -23,23 +27,23 @@ namespace LoggingInterface
             #if DEBUG // env debug == true
             try
             {
-                _debug.WriteLog(logPath, "debug statement");
+                _debug.WriteLog(p.path, "debug statement");
             }
             catch (Exception e)
             {
-                _debug.DeleteLog(logPath); // remove failed log
-                _error.WriteLog(logPath, e.Message); // error logger
+                _debug.DeleteLog(p.path); // remove failed log
+                _error.WriteLog(p.path, e.Message); // error logger
             }
             #endif
             
             try
             {
-                _info.WriteLog(logPath, "hello, world"); // default logger
+                _info.WriteLog(p.path, "hello, world"); // default logger
             }
             catch (Exception e)
             {
-                _info.DeleteLog(logPath); // remove failed log
-                _error.WriteLog(logPath, e.Message); // error logger
+                _info.DeleteLog(p.path); // remove failed log
+                _error.WriteLog(p.path, e.Message); // error logger
             }
         }
     }
