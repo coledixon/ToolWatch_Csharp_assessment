@@ -9,6 +9,25 @@ namespace LoggingInterface
 {
     class logger
     {
+        public static void WriteLog(string path, string output)
+        {
+            if (!File.Exists(path))
+            {
+                File.Create(path);
+            }
+
+            // begin writing to the log
+            using (StreamWriter s = new StreamWriter(path))
+            {
+                s.WriteLine(output);
+                s.Close();
+            }
+        }
+
+        public static string things()
+        {
+            return "\\" + DateTime.UtcNow.Ticks; 
+        }
         // TO DO
         // base class with more behavioural definitions
     }
@@ -23,23 +42,13 @@ namespace LoggingInterface
     // log classes
     public class LogDebug : ILogger
     {
-        public string debugFile = "\\" + DateTime.UtcNow.Ticks + "_DEBUG.txt";
+        public string debugFile = logger.things() + "_DEBUG.txt";
+
         public void WriteLog(string path, string output)
         {
             string _path = path + debugFile;
 
-            // validate file exists
-            if (!File.Exists(debugFile))
-            {
-                File.Create(_path);
-            }
-
-            // begin writing to the log
-            using (StreamWriter s = new StreamWriter(_path))
-            {
-                s.WriteLine(output);
-                s.Close();
-            }
+            logger.WriteLog(_path, output);
         }
 
         public void DeleteLog(string path)
@@ -56,18 +65,7 @@ namespace LoggingInterface
         {
             string _path = path + errorFile;
 
-            // validate file exists
-            if (!File.Exists(errorFile))
-            {
-                File.Create(_path);
-            }
-
-            // begin writing to the log
-            using (StreamWriter s = new StreamWriter(_path))
-            {
-                s.WriteLine(output);
-                s.Close();
-            }
+            logger.WriteLog(_path, output);
         }
     }
 
@@ -78,18 +76,7 @@ namespace LoggingInterface
         {
             string _path = path + infoFile;
 
-            // validate file exists
-            if (!File.Exists(infoFile))
-            {
-                File.Create(_path);
-            }
-
-            // begin writing to the log
-            using (StreamWriter s = new StreamWriter(_path))
-            {
-                s.WriteLine(output);
-                s.Close();
-            }
+            logger.WriteLog(_path, output);
         }
 
         public void DeleteLog(string path)
